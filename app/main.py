@@ -20,6 +20,6 @@ def read_root():
 def categorize_email_endpoint(email: EmailInput):
     try:
         category = categorize_email(email.subject, email.content)
-        return {"subject": email.subject, "content": email.content, "category": category}
+        return {"category": category}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
