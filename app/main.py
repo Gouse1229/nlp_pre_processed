@@ -7,7 +7,6 @@ app = FastAPI(title="Email Categorization API", version="1.0")
 
 # Input schema
 class EmailInput(BaseModel):
-    subject: str
     content: str
 
 # Root endpoint
@@ -19,7 +18,7 @@ def read_root():
 @app.post("/categorize")
 def categorize_email_endpoint(email: EmailInput):
     try:
-        category = categorize_email(email.subject, email.content)
+        category = categorize_email(email.content)
         return {"category": category}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
